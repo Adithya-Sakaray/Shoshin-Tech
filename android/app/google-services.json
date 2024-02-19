@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046604976294",
+    "project_id": "shoshin-app",
+    "storage_bucket": "shoshin-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046604976294:android:6e787c6a73ebf24c22e467",
+        "android_client_info": {
+          "package_name": "com.example.shoshin_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFnqAnrLmFxK7eJYRkWt4i-oarpRDKMUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
