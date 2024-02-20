@@ -5,7 +5,7 @@ Widget myButton(String title,context){
     height: 50,
     width: 320,
     decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.secondary,
+      color: Theme.of(context).colorScheme.primary,
       borderRadius: BorderRadius.circular(12)
     ),
     child:  Center(child: Padding(

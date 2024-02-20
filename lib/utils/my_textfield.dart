@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoshin_app/theme.dart';
 
 class MyTextfield  extends StatelessWidget {
   final controller;
@@ -19,6 +20,7 @@ class MyTextfield  extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: shouldObscureText,
+        style: const TextStyle(color: Colors.black),
         decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
@@ -26,10 +28,10 @@ class MyTextfield  extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Theme.of(context).colorScheme.tertiary),
+            borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
             borderRadius: BorderRadius.circular(10)
           ),
-          fillColor: Theme.of(context).colorScheme.primary,
+          fillColor: lightGrey,
           filled: true,
         ),
       ),

@@ -1,3 +1,4 @@
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
 class HomeScreen extends StatelessWidget {
@@ -5,8 +6,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Home screen", style: TextStyle(color: Colors.black),)),
+    return  Scaffold(
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
+                child: const Text("signout", style: TextStyle(color: Colors.black),)
+                ),
+              const SizedBox(height: 50,),
+              const Text(
+                      "Home screen",
+                      style: TextStyle(color: Colors.black),
+                    ),
+            ],
+          )),
     );
   }
 }
