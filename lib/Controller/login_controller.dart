@@ -5,14 +5,9 @@ import 'package:shoshin_app/utils/my_alert_box.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
+  var showError = false.obs;
+  var errorMessage = "".obs;
 
-  void showAlertBox(String text) {
-    showDialog(
-        context: Get.context!,
-        builder: (context) {
-          return MyAlertBox(text: text);
-        });
-  }
 
   void loginUser(
       String email,
@@ -23,7 +18,8 @@ class LoginController extends GetxController {
       if(email != "" && password != "") {
         isLoading.value = true;
       } else {
-        showAlertBox("Please enter the credentials");
+        errorMessage.value = "Please enter the credentials";
+        showError.value = true;
       }
 
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -34,13 +30,16 @@ class LoginController extends GetxController {
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        showAlertBox('No user found for that email.');
+        errorMessage.value = "No user found for that email.";
+        showError.value = true;
         isLoading.value = false;
       } else if (e.code == 'wrong-password') {
-        showAlertBox('Wrong password provided for that user.');
+        errorMessage.value = 'Wrong password provided for that user.';
+        showError.value = true;
         isLoading.value = false;
       } else {
-        showAlertBox(e.toString());
+        errorMessage.value = e.toString();
+        showError.value = false;
         isLoading.value = false;
       }
     }

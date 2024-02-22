@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   size: 70,
                 ),
                 mediumGap(),
-                const Text("Welcome, back you've been missed!"),
+                const Text("Welcome, back you've been missed!" ,style: TextStyle(color: Colors.black),),
                 mediumGap(),
                 MyTextfield(
                     controller: _emailController,
@@ -83,7 +83,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     )),
-                mediumGap(),
+                smallGap(),
+                Text(
+                  loginController.errorMessage.value,
+                  style: TextStyle(
+                    color: loginController.showError.value ? Theme.of(context).colorScheme.error : Colors.transparent ,
+                  ),
+                ),
+                smallGap(),
                 GestureDetector(
                     onTap: () => loginController.loginUser(
                         _emailController.text.trim(),
