@@ -84,10 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     )),
                 smallGap(),
-                Text(
-                  loginController.errorMessage.value,
-                  style: TextStyle(
-                    color: loginController.showError.value ? Theme.of(context).colorScheme.error : Colors.transparent ,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Text(
+                    loginController.errorMessage.value,
+                    style: TextStyle(
+                      color: loginController.showError.value ? Theme.of(context).colorScheme.error : Colors.transparent ,
+                    ),
                   ),
                 ),
                 smallGap(),

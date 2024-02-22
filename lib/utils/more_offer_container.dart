@@ -5,13 +5,15 @@ class MoreOfferContainer extends StatelessWidget {
   final String imageUrl;
   final String title;
   final int rewardPrice;
-  final int users;
+  final users;
+  final colorString;
   const MoreOfferContainer({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.rewardPrice,
     required this.users,
+    required this.colorString
 
   });
 
@@ -24,7 +26,7 @@ class MoreOfferContainer extends StatelessWidget {
         decoration:  BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
+            color: Color(int.parse(colorString.substring(1, 7), radix: 16) + 0xFF000000),
             width: 2,
           )
         ),

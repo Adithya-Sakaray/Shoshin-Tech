@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "package:get/get.dart";
+import "package:shoshin_app/Controller/all_offers_controller.dart";
+import "package:shoshin_app/Controller/offer_details_controller.dart";
 import "package:shoshin_app/Controller/home_controller.dart";
 import "package:shoshin_app/Screens/all_offers_screen.dart";
 import "package:shoshin_app/Screens/gifts_screen.dart";
@@ -9,12 +11,18 @@ import "package:shoshin_app/Screens/upcoming_screen.dart";
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
 
-   final HomeController homeController = Get.find<HomeController>();
+
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    HomeController homeController = Get.put(HomeController());
+
+    AllOffersController allOffersController = AllOffersController();
+    OfferDetailsController offerDetailsController = OfferDetailsController();
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(

@@ -12,12 +12,17 @@ class _GiftsScreenState extends State<GiftsScreen> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Center(
-        child: Column(
-          children: [
-            Text("Gifts Page", style: TextStyle(color: Theme.of(context).colorScheme.onBackground),)
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          Icon(
+            Icons.card_giftcard_rounded,
+            color: Theme.of(context).colorScheme.tertiary,
+            size: 150,
+          ),
+          Text("You can view your gifts here", style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 20),)
+        ],
       ),
     );
   }

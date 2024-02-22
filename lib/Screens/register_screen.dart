@@ -76,7 +76,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   shouldObscureText: true,
                 ),
                 smallGap(),
-                mediumGap(),
+                Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    registerController.errorMsg.value,
+                    style: TextStyle(
+                      color: registerController.showError.value ? Theme.of(context).colorScheme.error : Colors.transparent ,
+                    ),
+                  ),
+                ),
+                smallGap(),
                 GestureDetector(
                   onTap: () => registerController.registerUserWithEmail(
                     _password1Controller.text.trim(),

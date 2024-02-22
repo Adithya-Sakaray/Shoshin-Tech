@@ -12,7 +12,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(HomeController());
   runApp(const MyApp());
 }
 
@@ -22,7 +21,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+
+    HomeController homeController = HomeController();
+
     return MaterialApp(
       title: 'Shoshin',
       theme: lightThemeData,

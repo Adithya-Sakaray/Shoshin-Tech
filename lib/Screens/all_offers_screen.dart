@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoshin_app/Controller/all_offers_controller.dart';
+import 'package:shoshin_app/Screens/loading_screen.dart';
+import 'package:shoshin_app/Screens/offer_details_screen.dart';
 import 'package:shoshin_app/utils/gaps.dart';
 import 'package:shoshin_app/utils/more_offer_container.dart';
 import 'package:shoshin_app/utils/offer_container.dart';
@@ -9,78 +12,108 @@ class AllOffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-        
-            Text("🔥 Trending Offers", style: TextStyle(color: Colors.grey.shade700, fontSize: 16),),
-        
-            smallGap(),
-        
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  OfferContainer(
-                      title: "Alto's Odysseykgg dvfvf",
-                      url: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                      price: 200,
-                      users: 400),
-                  OfferContainer(
-                      title: "Alto's Odyssey",
-                      url: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                      price: 200,
-                      users: 400),
-                  OfferContainer(
-                      title: "Alto's Odyssey",
-                      url: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                      price: 200,
-                      users: 400),
-                ],
-              ),
-            ),
-        
-            smallGap(),
-        
-            Text("📈 More Offers", style: TextStyle(color: Colors.grey.shade700, fontSize: 16)),
-        
-            smallGap(),
-        
-            MoreOfferContainer(
-                imageUrl: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                title: "Alto's Odyssey",
-                rewardPrice: 200,
-                users: 4000
-            ),MoreOfferContainer(
-                imageUrl: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                title: "Alto's Odyssey",
-                rewardPrice: 200,
-                users: 4000
-            ),MoreOfferContainer(
-                imageUrl: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                title: "Alto's Odyssey",
-                rewardPrice: 200,
-                users: 4000
-            ),MoreOfferContainer(
-                imageUrl: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                title: "Alto's Odyssey",
-                rewardPrice: 200,
-                users: 4000
-            ),MoreOfferContainer(
-                imageUrl: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-                title: "Alto's Odyssey",
-                rewardPrice: 200,
-                users: 4000
-            ),
-        
-        
-          ],
-        ),
-      ),
-    );
+    AllOffersController allOffersController = Get.put(AllOffersController());
+
+     if(allOffersController.allOfferModel.isEmpty) {
+      return const LoadingScreen();
+    } else {
+       return Padding(
+         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             Text(
+               "🔥 Trending Offers",
+               style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
+             ),
+             smallGap(),
+
+             // Wrapped the ListView.builder with Expanded
+             SizedBox(
+               height: 200,
+               child: ListView.builder(
+                 itemCount: allOffersController.allOfferModel.length,
+                 scrollDirection: Axis.horizontal,
+                 itemBuilder: (context, index) {
+                   return GestureDetector(
+                     onTap: () {
+                       Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                               builder: (builder) =>
+                                   OfferDetailScreen(
+                                     title: allOffersController.allOfferModel[index].brand.title,
+                                     imageUrl: allOffersController.allOfferModel[index].thumbnail,
+                                     description: allOffersController.allOfferModel[index].title,
+                                     users: allOffersController.allOfferModel[index].totalLead,
+                                     totalAmount: allOffersController.allOfferModel[index].payoutAmt,
+                                     appRating: double.parse(allOffersController.allOfferModel[index].customData.appRating),
+                                   )
+                           )
+                       );
+                     },
+                     child: OfferContainer(
+                       title: allOffersController.allOfferModel[index].brand
+                           .title,
+                       url: allOffersController.allOfferModel[index].thumbnail,
+                       price: allOffersController.allOfferModel[index].payoutAmt,
+                       users: allOffersController.allOfferModel[index].totalLead,
+                     ),
+                   );
+                 },
+               ),
+             ),
+
+             smallGap(),
+             Text(
+               "📈 More Offers",
+               style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
+             ),
+             smallGap(),
+
+             // Wrapped the ListView.builder with Expanded
+             Expanded(
+               child: ListView.builder(
+                 shrinkWrap: true,
+                 physics: const NeverScrollableScrollPhysics(),
+                 itemCount: allOffersController.allOfferModel.length,
+                 itemBuilder: (context, index) {
+                   return GestureDetector(
+                     onTap: () {
+                       Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                               builder: (builder) =>
+                                   OfferDetailScreen(
+                                       title: allOffersController.allOfferModel[index].brand.title,
+                                       imageUrl: allOffersController.allOfferModel[index].thumbnail,
+                                       description: allOffersController.allOfferModel[index].title,
+                                       users: allOffersController.allOfferModel[index].totalLead,
+                                       totalAmount: allOffersController.allOfferModel[index].payoutAmt,
+                                       appRating: double.parse(allOffersController.allOfferModel[index].customData.appRating),
+                                   )
+                           )
+                       );
+                     },
+                     child: MoreOfferContainer(
+                       imageUrl: allOffersController.allOfferModel[index]
+                           .thumbnail,
+                       title: allOffersController.allOfferModel[index].brand
+                           .title,
+                       rewardPrice: allOffersController.allOfferModel[index]
+                           .payoutAmt,
+                       users: allOffersController.allOfferModel[index].totalLead,
+                       colorString:
+                       allOffersController.allOfferModel[index].customData
+                           .dominantColor,
+                     ),
+                   );
+                 },
+               ),
+             ),
+           ],
+         ),
+       );
+     }
   }
 }

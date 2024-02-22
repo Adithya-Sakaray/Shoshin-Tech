@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:shoshin_app/utils/my_alert_box.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
@@ -39,7 +37,7 @@ class LoginController extends GetxController {
         isLoading.value = false;
       } else {
         errorMessage.value = e.toString();
-        showError.value = false;
+        showError.value = true;
         isLoading.value = false;
       }
     }
