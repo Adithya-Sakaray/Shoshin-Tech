@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    HomeController homeController = HomeController();
+    HomeController controller = Get.put(HomeController());
 
     AllOffersController allOffersController = AllOffersController();
     OfferDetailsController offerDetailsController = OfferDetailsController();
@@ -30,11 +30,7 @@ class HomeScreen extends StatelessWidget {
             title: Padding(
               padding:  const EdgeInsets.symmetric(vertical: 10.0),
               child: Obx(() {
-                if(homeController.userName.isEmpty){
-                  return const Text("Loading..");
-                } else {
-                  return Text("Hello, ${homeController.userName}");
-                }
+                  return Text("Hello, ${controller.userName.value}");
               }),
             ),
             backgroundColor: Theme.of(context).colorScheme.primary,
@@ -42,7 +38,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: IconButton(
-                  onPressed: () => homeController.signOutUser(),
+                  onPressed: () => controller.signOutUser(),
                   icon: const Icon(Icons.logout, size: 30),
                 ),
               )
