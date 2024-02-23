@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    HomeController homeController = HomeController();
 
     return MaterialApp(
       title: 'Shoshin',

@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    HomeController homeController = Get.put(HomeController());
+    HomeController homeController = HomeController();
 
     AllOffersController allOffersController = AllOffersController();
     OfferDetailsController offerDetailsController = OfferDetailsController();
@@ -29,11 +29,13 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
             title: Padding(
               padding:  const EdgeInsets.symmetric(vertical: 10.0),
-              child: GetBuilder<HomeController>(
-                builder: (controller) {
-                  return Text("Hello, ${controller.userName.value}");
-                },
-              ),
+              child: Obx(() {
+                if(homeController.userName.isEmpty){
+                  return const Text("Loading..");
+                } else {
+                  return Text("Hello, ${homeController.userName}");
+                }
+              }),
             ),
             backgroundColor: Theme.of(context).colorScheme.primary,
             actions: [
