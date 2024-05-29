@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shoshin_app/models/offer_details_model.dart';
 import '../models/offer_model.dart';
 
+// this is a comment
+
 class RemoteService {
   static Future<List<Offer>> fetchHomeScreenData() async {
     try {
